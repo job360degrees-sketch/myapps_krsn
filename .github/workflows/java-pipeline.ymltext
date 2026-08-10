@@ -1,0 +1,32 @@
+name: Java CI Pipeline
+
+# Trigger the pipeline on every push or pull request to the main branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-run:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Download your repository code onto the runner
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # Step 2: Set up the Java Development Kit (JDK)
+    - name: Set up JDK 17
+      uses: actions/actions-setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    # Step 3: Compile your Main.java file
+    - name: Compile Java Code
+      run: javac Main.java
+
+    # Step 4: Execute the compiled Java program
+    - name: Run Java Program
+      run: java Main
